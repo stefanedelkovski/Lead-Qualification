@@ -156,7 +156,27 @@ def get_leads():
     with app.app_context():
         leads = db.session.query(Lead).filter_by(file_id=file_id).order_by(
             Lead.audit_AI_priority_level.desc()).all()
-    return jsonify([lead.__dict__ for lead in leads]), 200
+
+    results = [{
+        "id": lead.id,
+        "file_id": lead.file_id,
+        "entry_id": lead.entry_id,
+        "company_name": lead.company_name,
+        "industry": lead.industry,
+        "business_model": lead.business_model,
+        "budget": lead.budget,
+        "revenue": lead.revenue,
+        "growth_goal": lead.growth_goal,
+        "urgency": lead.urgency,
+        "lead_sentiment": lead.lead_sentiment,
+        "additional_notes": lead.additional_notes,
+        "leads_AI_priority_level": lead.leads_AI_priority_level,
+        "audit_AI_priority_level": lead.audit_AI_priority_level,
+        "audit_AI_notes": lead.audit_AI_notes,
+        "audit_accuracy_score": lead.audit_accuracy_score
+    } for lead in leads]
+
+    return jsonify(results), 200
 
 
 @app.route('/get_entries', methods=['GET'])
@@ -164,7 +184,15 @@ def get_entries():
     file_id = request.args.get('file_id')
     with app.app_context():
         entries = db.session.query(Entry).filter_by(file_id=file_id).all()
-    return jsonify([entry.__dict__ for entry in entries]), 200
+
+    results = [{
+        "id": entry.id,
+        "raw_input": entry.raw_input,
+        "status": entry.status,
+        "file_id": entry.file_id
+    } for entry in entries]
+
+    return jsonify(results), 200
 
 
 @app.route('/get_edge_cases', methods=['GET'])
@@ -172,7 +200,16 @@ def get_edge_cases():
     file_id = request.args.get('file_id')
     with app.app_context():
         edge_cases = db.session.query(EdgeCase).filter_by(file_id=file_id).all()
-    return jsonify([edge_case.__dict__ for edge_case in edge_cases]), 200
+
+    results = [{
+        "id": edge_case.id,
+        "entry_id": edge_case.entry_id,
+        "file_id": edge_case.file_id,
+        "raw_input": edge_case.raw_input,
+        "reason": edge_case.reason
+    } for edge_case in edge_cases]
+
+    return jsonify(results), 200
 
 
 if __name__ == '__main__':

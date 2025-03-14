@@ -143,16 +143,45 @@ lead_qualification_project/
 
 ## Usage
 
-- **Process new leads**:
+### **1. Start the API**
+Once the installation is complete, **run the API**:
+```sh
+python app/main.py
+```
+
+### **2. Process a New Lead File**
+To upload and process a file via the API, use **cURL**:
+```sh
+curl.exe -X POST -F "file=@data/demo_data2.json" http://127.0.0.1:5000/process-file
+```
+- This sends the file to the API, triggering the **full pipeline**:
+  - Stores raw inquiries in the database.
+  - Flags invalid and edge-case entries.
+  - Extracts structured data.
+  - Assigns priority levels using GPT.
+  - Audits and reclassifies using DeepSeek.
+
+### **3. Retrieve Processed Results**
+After processing, results are stored in **two places**:
+1. **Database tables** (entries, leads, edge cases).
+2. **Output files** in `/output/` as **JSON and CSV**, named after the `file_id`.
+
+For example, if `demo_data2.json` is processed, the results will be:
+- `/output/demo_data2.json`
+- `/output/demo_data2.csv`
+
+### **4. Retrieve Processed Leads via API**
+Use the following API endpoints to fetch results:
+- **View all structured leads**:
   ```sh
-  python scripts/populate_db.py --file data/sample_leads.json   # or sample_leads.txt
+  curl -X GET http://127.0.0.1:5000/get-leads
   ```
-- **Audit lead classification**:
+- **View flagged edge cases**:
   ```sh
-  python app/services/assign_priority_audit.py sample_leads
+  curl -X GET http://127.0.0.1:5000/get-edge-cases
   ```
-- **View leads**:
+- **View raw entries (before processing)**:
   ```sh
-  python views/view_leads.py
+  curl -X GET http://127.0.0.1:5000/get-entries
   ```
 
