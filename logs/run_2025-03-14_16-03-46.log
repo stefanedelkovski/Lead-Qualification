@@ -1,0 +1,9 @@
+2025-03-14 16:03:46,065 - WARNING -  * Debugger is active!
+2025-03-14 16:03:46,067 - INFO -  * Debugger PIN: 792-561-517
+2025-03-14 16:04:05,199 - INFO - Processing file: demo_data2.json (file_id: demo_data2)
+2025-03-14 16:04:12,165 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-14 16:04:18,393 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-14 16:04:55,818 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-14 16:05:03,738 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-14 16:06:07,387 - INFO - All processes completed successfully for file_id: demo_data2
+2025-03-14 16:06:07,388 - INFO - 127.0.0.1 - - [14/Mar/2025 16:06:07] "POST /process-file HTTP/1.1" 200 -
