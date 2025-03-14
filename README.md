@@ -174,14 +174,14 @@ For example, if `demo_data2.json` is processed, the results will be:
 Use the following API endpoints to fetch results:
 - **View all structured leads**:
   ```sh
-  curl -X GET http://127.0.0.1:5000/get-leads
+  curl -X GET http://127.0.0.1:5000/get_leads?file_id=sample_data  # no extension
   ```
 - **View flagged edge cases**:
   ```sh
-  curl -X GET http://127.0.0.1:5000/get-edge-cases
+  curl -X GET http://127.0.0.1:5000/get_edge_cases?file_id=sample_data  # no extension
   ```
 - **View raw entries (before processing)**:
   ```sh
-  curl -X GET http://127.0.0.1:5000/get-entries
+  curl -X GET http://127.0.0.1:5000/get_entries?file_id=sample_data  # no extension
   ```
 
